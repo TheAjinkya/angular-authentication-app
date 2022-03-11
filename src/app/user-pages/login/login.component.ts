@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { EMPTY, range } from "rxjs";
 import { first, take } from "rxjs/operators";
 import { AuthenticationService } from "src/app/services/authentication.service";
 
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          console.log(res);
+           console.log("User Created: ", res);
         },
         error: (err) => {
           console.log(err);

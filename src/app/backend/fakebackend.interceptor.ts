@@ -10,7 +10,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, dematerialize, materialize } from 'rxjs/operators';
 
  
-const usersKey = "angular-10-registration-login-example";
+export const usersKey = "angular-10-registration-login-example";
 const users = JSON.parse(localStorage.getItem(usersKey)) || [];
 
 @Injectable()
@@ -56,11 +56,11 @@ export class FakebackendInterceptor implements HttpInterceptor {
       if (users.find(x => x.userName === user.userName)) {
         return error("Username "+ user.userName +" is already taken!")
       }
-      user.id = user.length ? Math.max(...users.map(x => x.id)) + 1 : 1
+      user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1
       users.push(user);
       localStorage.setItem(usersKey, JSON.stringify(users))
-      console.log("User Created: ", user);
-      return ok()
+     
+      return ok(user)
     }
 
     function ok(body?) {
